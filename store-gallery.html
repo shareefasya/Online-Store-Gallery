@@ -5,6 +5,7 @@
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <title>Store Gallery</title>
 <style>
+/*Set up CSS defaults*/
 body, html {
 	padding: 0;
 	margin: 0;
@@ -20,10 +21,12 @@ a {
 * {
 	transition: 0.6s;
 }
+/*Create a container that will hold the gallery*/
 .content {
 	padding: 4em 0 4em 0;
 	text-align: center;
 }
+/*Set up the figure its caption and the image that will be displayed in the gallery*/
 figure, figcaption, .image, .img-holder {
 	position: relative;
 }
@@ -31,9 +34,6 @@ figure {
 	display: inline-block;
 	margin: 10px;
 	text-align: center;
-}
-figure a {
-	text-decoration: none;
 }
 @media only screen and (max-width: 450px) {
 	figure {
@@ -48,6 +48,7 @@ figure a {
 	width: 247px;
 	overflow: hidden;	
 }
+/*The figure and modal will hold two images, therefore by default the images will not be displayed*/
 .image, .modal-col img {
 	width: 100%;
 	height: auto;
@@ -79,6 +80,8 @@ figure span {
 	text-decoration: line-through;
 	color: #ccc;
 }
+/*Create a figure overlay that will display certain information about the item such as a sale or new arrival*/
+/*Create a figure overlay that will display a link that will allow the user to add the item to s wish list*/
 .figure-overlay-left-top, .figure-overlay-left-bottom {
 	color: #ccc;
 	display: inline-block;
@@ -134,6 +137,7 @@ figure:hover .figure-overlay-left-bottom {
 		left: 20px;
 	}
 }
+/*Create the modal box that will display the item's image, title, and description*/
 .modal-content, .modal-col {
 	overflow: hidden;
 	position: relative;
@@ -216,6 +220,7 @@ figure:hover .figure-overlay-left-bottom {
 		width: 95%;
 	}
 }
+/*Create a button that will close the modal box*/
 .close-button {
 	position: absolute;
 	z-index: 10;
@@ -230,6 +235,7 @@ figure:hover .figure-overlay-left-bottom {
 .close-button:hover {
 	color: #666;
 }
+/*Add special CSS to the left and right column in the modal box*/
 .col-left {
 	float: left;
 }
@@ -246,6 +252,7 @@ figure:hover .figure-overlay-left-bottom {
 		float: none;
 	}
 }
+/*Add a navigation to the modal box that will allow the user to view different angles of the product*/
 .dot-nav {
 	position: absolute;
 	bottom: 0;
@@ -272,6 +279,7 @@ figure:hover .figure-overlay-left-bottom {
 		display: none;
 	}
 }
+/*Create keyframes and CSS classes that will animate transition from each image, and animate the modal box*/
 .fade {
   -webkit-animation-name: fade;
   -webkit-animation-duration: 1s;
@@ -308,11 +316,14 @@ figure:hover .figure-overlay-left-bottom {
 
 </style>
 <script>
+//Initialize a variable that will hold the index of the specific slide (or image)
 var slideIndex = 1;
+//Create a function that will set slideIndex to the selected slide and execute the showSlides function
 function currentSlide(slides, n) {
 	slideIndex = n;
 	showSlides(slides, slideIndex)
 }
+//Create a function that will display the selected slide
 function showSlides(className, index) {
   var i;
   var slides = document.getElementsByClassName(className);
@@ -323,6 +334,7 @@ function showSlides(className, index) {
   }
   slides[slideIndex-1].style.display = "block";  
 }
+//Create a function that will active the selected dot (navigation link) when clicked
 function activeDot(setName, n) {
   var i;
   var dots = document.getElementsByClassName(setName);
@@ -331,13 +343,15 @@ function activeDot(setName, n) {
   }
   dots[slideIndex-1].className += " active";
 }
+//Create a function that will open the selected modal
 function openModal(n) {
 	document.getElementsByClassName('modal')[n - 1].style.display = "block"; 
 }
+//Create a function that will close the selected modal
 function closeModal(n) {
 	document.getElementsByClassName('modal')[n - 1].style.display = "none"; 
 }
-
+//Create that will display default images on load
 function displayDefaults() {
 	currentSlide('set1',1);
 	currentSlide('set2',1);
@@ -353,6 +367,7 @@ function displayDefaults() {
 </head>
 
 <body onload="displayDefaults()">
+<!-- Setup a modal box for each product in the store gallery -->
 <div class="modal">
 	<div class="modal-content animate-bottom">
 		<a href="javascript:void(0)" class="close-button" onclick="closeModal(1)">&times;</a>
@@ -631,7 +646,8 @@ function displayDefaults() {
 		</div>
 	</div>
 </div>
-
+	
+<!-- Setup the content container and insert the figures -->
 <div class="content">
 	<figure onmouseover="currentSlide('set1',2)" onmouseout="currentSlide('set1',1)">
 		<a href="javascript:void(0)" class="img-holder" onclick="openModal(1), currentSlide('set1-1', 1), activeDot('dotset1', 1)">
@@ -732,6 +748,8 @@ function displayDefaults() {
 		<a href="#" class="figure-overlay-left-bottom" title="Add to Wishlist">&hearts;</a>
 	</figure>
 </div>
+	
+<!-- Create a script that will only the user to close a modal box by clicking anywhere on the screen -->
 <script>
 var modals = document.getElementsByClassName('modal');
 var i; 
